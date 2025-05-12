@@ -1,0 +1,231 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 70% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 30% 30%;
+    --muted-foreground: 0 0% 80%;
+
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+
+    --border: 210 50% 50%;
+    --input: 210 50% 15%;
+    --ring: 210 100% 50%;
+
+    --radius: 0.3rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-terminal-bg text-terminal-text font-mono;
+  }
+  
+  ::selection {
+    @apply bg-blue-500/60 text-terminal-white;
+  }
+}
+
+@layer utilities {
+  .terminal-shadow {
+    box-shadow: 0 0 30px rgba(0, 100, 255, 0.2), 0 0 40px rgba(0, 0, 0, 0.5) inset;
+  }
+  
+  .terminal-border {
+    @apply border border-blue-500/30 rounded-sm;
+  }
+  
+  .scanline {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 100, 255, 0.03) 50%,
+      rgba(0, 100, 255, 0.03)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+  
+  .crt-effect {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(18, 16, 16, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    pointer-events: none;
+  }
+  
+  .terminal-glitch {
+    text-shadow: 0.05em 0 0 rgba(0, 100, 255, 0.75),
+                -0.025em -0.05em 0 rgba(255, 255, 255, 0.75),
+                0.025em 0.05em 0 rgba(0, 200, 255, 0.75);
+    animation: glitch 500ms infinite;
+  }
+  
+  .command-prompt {
+    @apply text-blue-400 font-bold before:content-['$_'] before:mr-1;
+  }
+  
+  .terminal-matrix {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 10, 30, 0.9) 100%
+    );
+  }
+  
+  /* Updated styles for folder and file in command responses */
+  .folder {
+    @apply text-blue-400;
+  }
+
+  .file {
+    @apply text-white;
+  }
+
+  .executable {
+    @apply text-blue-300;
+  }
+
+  /* Update command response styling */
+  .help-command {
+    @apply text-blue-400 font-bold;
+  }
+
+  .parameter {
+    @apply text-blue-200;
+  }
+  
+  /* Custom scrollbar */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  /* Terminal themes */
+  .classic {
+    --terminal-bg-color: rgba(11, 11, 14, 0.4);
+    --terminal-text-color: #FFFFFF;
+    --terminal-prompt-color: #2080FF;
+  }
+  
+  .dark-blue {
+    --terminal-bg-color: rgba(0, 10, 40, 0.4);
+    --terminal-text-color: #A0F0FF;
+    --terminal-prompt-color: #00DFFF;
+  }
+  
+  .matrix {
+    --terminal-bg-color: rgba(0, 20, 0, 0.6);
+    --terminal-text-color: #00FF00;
+    --terminal-prompt-color: #00DD00;
+  }
+  
+  .cyberpunk {
+    --terminal-bg-color: rgba(20, 0, 30, 0.5);
+    --terminal-text-color: #F0A0FF;
+    --terminal-prompt-color: #FF00FF;
+  }
+  
+  /* Typing cursor animation */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #2080FF }
+  }
+  
+  .typing-animation {
+    border-right: 2px solid;
+    animation: blink-caret 0.75s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  /* Loading animation */
+  .loading-dots div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .loading-dots div:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(0, 100, 255, 0.75),
+                -0.05em -0.025em 0 rgba(255, 255, 255, 0.75),
+                -0.025em 0.05em 0 rgba(0, 200, 255, 0.75);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(0, 100, 255, 0.75),
+                -0.05em -0.025em 0 rgba(255, 255, 255, 0.75),
+                -0.025em 0.05em 0 rgba(0, 200, 255, 0.75);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(0, 100, 255, 0.75),
+                0.025em 0.025em 0 rgba(255, 255, 255, 0.75),
+                -0.05em -0.05em 0 rgba(0, 200, 255, 0.75);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(0, 100, 255, 0.75),
+                0.025em 0.025em 0 rgba(255, 255, 255, 0.75),
+                -0.05em -0.05em 0 rgba(0, 200, 255, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(0, 100, 255, 0.75),
+                0.05em 0 0 rgba(255, 255, 255, 0.75),
+                0 -0.05em 0 rgba(0, 200, 255, 0.75);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(0, 100, 255, 0.75),
+                0.05em 0 0 rgba(255, 255, 255, 0.75),
+                0 -0.05em 0 rgba(0, 200, 255, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(0, 100, 255, 0.75),
+                -0.025em -0.025em 0 rgba(255, 255, 255, 0.75),
+                -0.025em -0.05em 0 rgba(0, 200, 255, 0.75);
+  }
+}
+
+@keyframes matrix-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
